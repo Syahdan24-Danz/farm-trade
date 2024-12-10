@@ -117,7 +117,7 @@ const Product = () => {
           onClick={bargainToggle}
           className="bg-[#3a6b30] text-white p-4 mt-4 hover:bg-[#44b984] w-full rounded-xl"
         >
-          Tawar
+          Masukan Keranjang
         </button>
         <Bargain bargainToggle={bargainToggle} product={product} />
       </div>
