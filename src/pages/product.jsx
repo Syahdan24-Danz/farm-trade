@@ -5,16 +5,14 @@ import BackToggle from "../utils/back";
 import ShareToggle from "../utils/share";
 
 const Product = () => {
-  const { productData, cart, setCart } = useCart(); // Mendapatkan akses untuk mengubah cart langsung
+  const { productData, cart, setCart } = useCart();
   const { name } = useParams();
-  const [jumlah, setJumlah] = useState(1); // Set default jumlah menjadi 1
+  const [jumlah, setJumlah] = useState(1);
 
-  // Menambahkan jumlah produk
   const tambahJumlah = () => {
     setJumlah(jumlah + 1);
   };
 
-  // Mengurangi jumlah produk
   const kurangJumlah = () => {
     if (jumlah > 1) {
       setJumlah(jumlah - 1);
@@ -27,39 +25,42 @@ const Product = () => {
     return <p>Produk tidak ditemukan</p>;
   }
 
-  // Cek apakah produk sudah ada di keranjang
   const cartItem = cart.find((item) => item.name === product.name);
 
-  // Fungsi untuk memperbarui keranjang
   const handleAddToCart = () => {
     if (jumlah > 0) {
       if (cartItem) {
         const updatedCart = cart.map((item) => {
           if (item.id === product.id) {
             console.log(item);
-            return { ...item, quantity: item.quantity + jumlah }; // Update jumlah produk yang ada
+            return { ...item, quantity: item.quantity + jumlah };
           }
           return item;
         });
-        setCart(updatedCart); // Perbarui keranjang dengan updatedCart
+        setCart(updatedCart);
       } else {
-        // Jika produk belum ada di keranjang, tambahkan produk baru dengan jumlah yang sesuai
         const newItem = { ...product, quantity: jumlah };
-        setCart([...cart, newItem]); // Menambahkan produk baru ke keranjang
+        setCart([...cart, newItem]);
       }
     }
   };
 
+  const bargainToggle = () => {
+    const bargain = document.getElementById("bargain");
+    bargain.classList.toggle("hidden");
+    const bgProduct = document.getElementById("product");
+    bgProduct.classList.toggle("bg-gray-200");
+  };
+
   return (
-    <div className="min-h-full flex flex-col items-center">
+    <div id="product" className="min-h-full flex flex-col items-center">
       <div>
         <BackToggle />
         <ShareToggle />
       </div>
-
       <div className="h-1/2 w-full p-2 bg-gray-200 rounded-b-xl mb-4">
         <img
-          src={`/${product.image}`} // Pastikan path gambar benar
+          src={`/${product.image}`}
           alt={product.name}
           className="bg-contain h-full w-full object-cover"
         />
@@ -90,26 +91,80 @@ const Product = () => {
               +
             </button>
           </div>
-          <p className="text-lg text-gray-600 mt-2">
+          <p className="text-2xl font-semibold mt-2">
             Rp. {product.price.toLocaleString()}
           </p>
         </div>
-        <div className="mt-4">
+        <div className="mt-4 pb-2 border-b border-gray-300">
           <h1 className="text-lg font-semibold">Detail Produk</h1>
           <p className="mt-2 text-gray-600 text-justify">
             {product.description} {/* Perbaikan typo disini */}
           </p>
         </div>
+        <div className="mt-4 pb-2 border-b border-gray-300 flex flex-row justify-between items-center">
+          <div>
+            <h1 className="text-lg font-semibold">Nutrisi</h1>
+          </div>
+          <div className="bg-[#ebebeb] h-full px-4 py-1 rounded-lg text-center">
+            <p className=" text-gray-600 text-lg">{product.nutrition}</p>
+          </div>
+        </div>
+        <div className="mt-4 pb-2 border-b border-gray-300">
+          <h1 className="text-lg font-semibold">Ulasan</h1>
+        </div>
 
         <button
-          onClick={handleAddToCart}
+          onClick={bargainToggle}
           className="bg-[#3a6b30] text-white p-4 mt-4 hover:bg-[#44b984] w-full rounded-xl"
         >
-          Tambah ke Keranjang
+          Tawar
         </button>
+        <Bargain bargainToggle={bargainToggle} product={product} />
       </div>
     </div>
   );
 };
 
 export default Product;
+
+const Bargain = ({ bargainToggle, product }) => {
+  return (
+    <div
+      id="bargain"
+      className="rounded-t-2xl fixed bottom-0 h-1/2 w-full p-2 bg-white hidden transition duration-500 ease-in-out"
+    >
+      <button onClick={bargainToggle} className="absolute top-4 right-4">
+        <img className="w-6" src="../close.svg" alt="" />
+      </button>
+      <div className="flex flex-col items-center justify-center py-2 px-4">
+        <h1 className="text-xl font-semibold">
+          Berikan Penawaran Terbaik Anda!
+        </h1>
+        <div className="w-full border-b border-gray-300 py-2">
+          <div className="flex flex-row items-center w-full justify-between">
+            <p>Harga Sebelumnya</p>
+            <h1 className="text-lg font-semibold">Rp. {product.price.toLocaleString()}</h1>
+          </div>
+          <p>Harga Terbaik Anda</p>
+          <div className="text-center">
+            <input
+              className="bg-gray-200 p-2 h-20 rounded-xl w-3/4 mt-4 placeholder:text-black placeholder:text-center placeholder:text-2xl placeholder:font-bold"
+              placeholder="Enter Here"
+              type="number"
+            />
+          </div>
+          <p className="text-xs text-gray-600 mt-2 text-justify">
+            Dengan melakukan pemesanan, Anda setuju dengan{" "}
+            <strong>Syarat</strong> dan <strong>Ketentuan kami.</strong>
+          </p>
+        </div>
+        <button
+          onClick={bargainToggle}
+          className="bg-[#3a6b30] text-white p-4 mt-4 hover:bg-[#44b984] w-full rounded-xl"
+        >
+          Konfirmasi Penawaran
+        </button>
+      </div>
+    </div>
+  );
+};

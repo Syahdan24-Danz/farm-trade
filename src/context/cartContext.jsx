@@ -14,7 +14,8 @@ export const CartProvider = ({ children }) => {
       name: "Sawi",
       price: 15000,
       image: "sawi.png",
-      deskription:
+      nutrition: 100,
+      description:
         "Apel bergizi. Apel mungkin baik untuk menurunkan berat badan. Apel mungkin baik untuk jantung Anda. Sebagai bagian dari diet yang sehat dan bervariasi. Apel Merah ini bersertifikasi BPOM ;)",
     },
     { id: 2, name: "Apel", price: 12000, image: "apple.png" },

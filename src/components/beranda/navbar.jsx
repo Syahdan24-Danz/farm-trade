@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav className="py-12 flex flex-row relative">
+    <nav className="py-12 flex flex-row relative z-10">
       <div className=" py-6 w-full fixed bg-white rounded-t-2xl shadow-md border-t bottom-0 flex flex-row justify-evenly items-center">
         <Link to="/" className="flex items-center">
           <img src="beranda.png" alt="" />

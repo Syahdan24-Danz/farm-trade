@@ -43,6 +43,7 @@ const CardCart = () => {
               </div>
               <div>
                 <h3 className="text-lg font-semibold">{item.name}</h3>
+                <p className="text-xs text-gray-600">1Kg, Harga</p>
                 <p>Rp. {item.price.toLocaleString()}</p>
                 <div className="flex items-center gap-2 mt-2">
                   <button
