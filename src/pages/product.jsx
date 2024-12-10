@@ -131,7 +131,7 @@ const Bargain = ({ bargainToggle, product }) => {
   return (
     <div
       id="bargain"
-      className="rounded-t-2xl fixed bottom-0 h-1/2 w-full p-2 bg-white hidden transition duration-500 ease-in-out"
+      className="z-20 rounded-t-2xl fixed bottom-0 h-1/2 w-full p-2 bg-white hidden transition duration-500 ease-in-out"
     >
       <button onClick={bargainToggle} className="absolute top-4 right-4">
         <img className="w-6" src="../close.svg" alt="" />
