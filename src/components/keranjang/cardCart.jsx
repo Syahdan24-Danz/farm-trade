@@ -1,6 +1,6 @@
 import { useCart } from "../../context/cartContext"; // Mengimpor `useCart` dari context yang relevan
 import { useState, useEffect } from "react";
-
+import { Link } from "react-router-dom";
 const CardCart = () => {
   const {
     cart,
@@ -8,16 +8,12 @@ const CardCart = () => {
     decreaseQuantity,
     increaseQuantity,
     calculateTotal,
+    calculateTotalByProductId,
   } = useCart();
 
   const [total, setTotal] = useState(0);
   const [productId, setProductId] = useState(1);
-
-  const calculateTotalByProductId = (productId) => {
-    return cart
-      .filter((item) => item.id === productId)
-      .reduce((total, item) => total + item.price * item.quantity, 0);
-  };
+  console.log(cart);
 
   useEffect(() => {
     const newTotal = calculateTotalByProductId(productId);
@@ -29,7 +25,7 @@ const CardCart = () => {
   }
 
   return (
-    <div className="flex flex-col justify-evenly h-full">
+    <div className="flex flex-col justify-between min-h-full">
       <div className="border-b border-gray-300 h-full">
         {cart.map((item) => (
           <div key={item.id} className="flex justify-between items-center mb-4">
@@ -80,9 +76,12 @@ const CardCart = () => {
         ))}
       </div>
       <div className="flex justify-end">
-        <button className="bg-[#3a6b30] text-white p-4 mt-4 hover:bg-[#44b984] w-full rounded-xl">
+        <Link
+          to={`/checkout/${cart.id}`}
+          className="bg-[#3a6b30] text-white p-4 mt-4 hover:bg-[#44b984] w-full rounded-xl"
+        >
           <h1>Checkout Rp. {calculateTotal().toLocaleString()}</h1>
-        </button>
+        </Link>
       </div>
     </div>
   );

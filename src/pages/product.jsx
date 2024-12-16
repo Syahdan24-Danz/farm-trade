@@ -3,6 +3,7 @@ import { useCart } from "../context/cartContext";
 import { useState } from "react";
 import BackToggle from "../utils/back";
 import ShareToggle from "../utils/share";
+import { Link } from "react-router-dom";
 
 const Product = () => {
   const { productData, cart, setCart } = useCart();
@@ -53,7 +54,7 @@ const Product = () => {
   };
 
   return (
-    <div id="product" className="min-h-full flex flex-col items-center">
+    <div id="product" className="min-h-full flex flex-col items-center ">
       <div>
         <BackToggle />
         <ShareToggle />
@@ -75,25 +76,36 @@ const Product = () => {
             <img className="w-6" src="../love.svg" alt="" />
           </div>
         </div>
-        <div className="flex flex-row justify-between border-b border-gray-300 py-2">
-          <div className="flex items-center gap-2 mt-2">
+        <div>
+          <div className="flex flex-row justify-between border-b border-gray-300 py-2">
+            <div className="flex items-center gap-2 mt-2">
+              <button
+                onClick={kurangJumlah}
+                className="bg-red-500 text-white py-1 px-3 rounded"
+              >
+                -
+              </button>
+              <span>{jumlah}</span>
+              <button
+                onClick={tambahJumlah}
+                className="bg-green-500 text-white py-1 px-3 rounded"
+              >
+                +
+              </button>
+            </div>
+            <p className="text-2xl font-semibold mt-2">
+              Rp. {product.price.toLocaleString()}
+            </p>
+          </div>
+          <div className="w-full flex justify-end items-center">
             <button
-              onClick={kurangJumlah}
-              className="bg-red-500 text-white py-1 px-3 rounded"
+              onClick={bargainToggle}
+              className="text-xs flex items-center gap-2 mt-2 bg-[#3a6b30] text-white py-1 px-3 rounded"
             >
-              -
-            </button>
-            <span>{jumlah}</span>
-            <button
-              onClick={tambahJumlah}
-              className="bg-green-500 text-white py-1 px-3 rounded"
-            >
-              +
+              <img className="w-4" src="../pen.svg" alt="" />
+              Berikan Penawaran Terbaik Anda Disini!
             </button>
           </div>
-          <p className="text-2xl font-semibold mt-2">
-            Rp. {product.price.toLocaleString()}
-          </p>
         </div>
         <div className="mt-4 pb-2 border-b border-gray-300">
           <h1 className="text-lg font-semibold">Detail Produk</h1>
@@ -103,52 +115,56 @@ const Product = () => {
         </div>
         <div className="mt-4 pb-2 border-b border-gray-300 flex flex-row justify-between items-center">
           <div>
-            <h1 className="text-lg font-semibold">Nutrisi</h1>
+            <h1 className="text-lg font-semibold">Minimal Order</h1>
           </div>
           <div className="bg-[#ebebeb] h-full px-4 py-1 rounded-lg text-center">
             <p className=" text-gray-600 text-lg">{product.nutrition}</p>
           </div>
         </div>
-        <div className="mt-4 pb-2 border-b border-gray-300">
+        <div className="mt-4 pb-2 border-b border-gray-300 flex flex-row justify-between">
           <h1 className="text-lg font-semibold">Ulasan</h1>
+          <img className="w-24 h-full" src="../rating.png" alt="" />
         </div>
-
+        <TokoProduct />
         <button
           onClick={bargainToggle}
           className="bg-[#3a6b30] text-white p-4 mt-4 hover:bg-[#44b984] w-full rounded-xl"
         >
           Masukan Keranjang
         </button>
-        <Bargain bargainToggle={bargainToggle} product={product} />
+        <div>
+          <Bargain bargainToggle={bargainToggle} product={product} />
+        </div>
       </div>
     </div>
   );
 };
 
 export default Product;
-
 const Bargain = ({ bargainToggle, product }) => {
   return (
     <div
       id="bargain"
-      className="z-20 rounded-t-2xl fixed bottom-0 h-1/2 w-full p-2 bg-white hidden transition duration-500 ease-in-out"
+      className="w-full z-20 rounded-t-2xl fixed bottom-0 p-2 bg-white hidden transition duration-500 ease-in-out overflow-y-auto"
     >
       <button onClick={bargainToggle} className="absolute top-4 right-4">
-        <img className="w-6" src="../close.svg" alt="" />
+        <img className="w-6" src="../close.svg" alt="Close" />
       </button>
-      <div className="flex flex-col items-center justify-center py-2 px-4">
-        <h1 className="text-xl font-semibold">
+      <div className="flex flex-col items-center justify-center py-2 px-4 space-y-4">
+        <h1 className="text-xl font-semibold text-center">
           Berikan Penawaran Terbaik Anda!
         </h1>
         <div className="w-full border-b border-gray-300 py-2">
           <div className="flex flex-row items-center w-full justify-between">
             <p>Harga Sebelumnya</p>
-            <h1 className="text-lg font-semibold">Rp. {product.price.toLocaleString()}</h1>
+            <h1 className="text-lg font-semibold">
+              Rp. {product.price.toLocaleString()}
+            </h1>
           </div>
           <p>Harga Terbaik Anda</p>
           <div className="text-center">
             <input
-              className="bg-gray-200 p-2 h-20 rounded-xl w-3/4 mt-4 placeholder:text-black placeholder:text-center placeholder:text-2xl placeholder:font-bold"
+              className="bg-gray-200 p-2 h-16 rounded-xl w-full max-w-[90%] mt-4 placeholder:text-black placeholder:text-center placeholder:text-2xl placeholder:font-bold"
               placeholder="Enter Here"
               type="number"
             />
@@ -164,6 +180,33 @@ const Bargain = ({ bargainToggle, product }) => {
         >
           Konfirmasi Penawaran
         </button>
+      </div>
+    </div>
+  );
+};
+
+const TokoProduct = () => {
+  return (
+    <div className="text-[#3a6b30] py-4 flex flex-row justify-between">
+      <div className="flex flex-row gap-4 items-center">
+        <div>
+          <img className=" w-16 rounded-full" src="../pp-tani.png" alt="" />
+        </div>
+        <div className="flex flex-col gap-1">
+          <h1 className="text-xl">PT Tani Raya</h1>
+          <p className="text-sm">Aktif 3 Menit Lalu</p>
+          <div className="flex flex-row text-xs gap-2">
+            <div className="flex flex-row">
+              <img className="w-4" src="../star.svg" alt="" />
+              <p>4.9/5.0 </p>
+            </div>
+            <p>100 RB Pengikut</p>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-col gap-2 text-center">
+        <Link className="border border-[#3a6b30] p-2 rounded-xl">Kunjungi</Link>
+        <Link className="border border-[#3a6b30] p-2 rounded-xl">Chat</Link>
       </div>
     </div>
   );

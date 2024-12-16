@@ -24,7 +24,7 @@ const CardProduct = () => {
           <div className="flex flex-col w-full items-center">
             <Link className="h-1/2 p-2 w-full" to={`/product/${product.name}`}>
               <img
-                className="bg-contain h-full w-full object-cover"
+                className="bg-contain h-full w-full"
                 src={product.image}
                 alt={product.name}
               />
@@ -37,14 +37,18 @@ const CardProduct = () => {
                 </div>
               </Link>
               <div className="flex flex-row items-center justify-between gap-2 mt-4">
-                <h1 className="text-sm font-bold">
-                  Rp. {product.price.toLocaleString()}
-                </h1>
+                <div className="flex flex-col text-left">
+                  <h1 className="text-md font-bold">
+                    {product.price.toLocaleString()}
+                  </h1>
+                  <img className="w-12" src="rating.png" alt="" />
+                  <p className="text-[8px]">5000+ kg Terjual</p>
+                </div>
                 <button
                   onClick={() => addToCart(product)}
                   className="bg-[#3A6B30] text-white p-2 rounded-xl"
                 >
-                  <img className="w-4" src="plus.svg" alt="Add" />
+                  <img className="w-6" src="plus.svg" alt="Add" />
                 </button>
               </div>
             </div>
