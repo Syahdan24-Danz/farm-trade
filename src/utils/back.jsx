@@ -6,7 +6,10 @@ const BackToggle = () => {
     navigate(-1); // Menggunakan navigate untuk kembali ke halaman sebelumnya
   };
   return (
-    <button onClick={handleBack} className="hover:bg-gray-700 rounded-full absolute top-4 left-4">
+    <button
+      onClick={handleBack}
+      className="hover:bg-gray-700 rounded-full absolute top-4 left-4"
+    >
       <img className="w-8" src="../back.svg" alt="back" />
     </button>
   );

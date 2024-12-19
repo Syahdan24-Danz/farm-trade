@@ -1,8 +1,9 @@
+/* Mengatur box-sizing secara global agar padding dan border dihitung dalam ukuran elemen */
 body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  color: #000 !important;
+  color: #000; /* Menghapus !important jika tidak diperlukan */
   font-family: "Lato", sans-serif;
   width: 100%;
   height: 100%;
@@ -11,18 +12,26 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+/* Pengaturan untuk class .app */
 .app {
-  max-width: 768px;
-  min-width: 320px;
-  width: 100%;
-  height: 100%;
-  min-height: 100vh;
+  width: 100%; /* Gunakan lebar 100% agar responsif */
+  max-width: 599px; /* Membatasi lebar maksimal */
+  min-width: 599px;
+  height: 100%; /* Gunakan tinggi 100% */
+  min-height: 480px; /* Minimal tinggi 480px */
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
+  position: relative;
 }
-.app > div {
-  width: 100%; /* Lebar penuh dari kontainer induk */
-  max-width: 599px; /* Lebar maksimal 599px */
+
+/* Media query untuk perangkat dengan lebar layar lebih besar dari 1024px */
+@media screen and (min-width: 1024px) {
+  .app {
+    max-width: 599px; /* Lebar tetap 599px pada layar besar */
+    min-height: 480px; /* Tinggi tetap 480px pada layar besar */
+    width: 100%; /* Memastikan lebar 100% agar responsif */
+  }
 }

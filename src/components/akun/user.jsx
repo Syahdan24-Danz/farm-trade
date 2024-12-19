@@ -15,7 +15,7 @@ const User = () => {
         <Link to=""></Link>
       </div>
       <div>
-        <Link to="">Mulai Jual</Link>
+        <Link to="/tokoSaya">Mulai Jual</Link>
       </div>
     </div>
   );

@@ -17,16 +17,19 @@ import { CartProvider } from "./context/cartContext.jsx";
 import Product from "./pages/product.jsx";
 import CheckOut from "./pages/checkout.jsx";
 import Sukses from "./pages/sukses.jsx";
+import PageProduk from "./pages/seller/pageProduk.jsx";
+import TokoSaya from "./pages/seller/tokoSaya.jsx";
+import ProdukSaya from "./pages/seller/produkSaya.jsx";
+import AddProductForm from "./pages/seller/tambahProduk.jsx";
+import Penghasilan from "./pages/seller/penghasilan.jsx";
 
-// Komponen App yang menangani rute dan navbar
 function App() {
-  const location = useLocation(); // Mengambil lokasi saat ini
+  const location = useLocation();
 
-  // Cek jika lokasi saat ini adalah '/checkout/:id' maka navbar tidak akan ditampilkan
   const hideNavbar = location.pathname.startsWith("/checkout");
 
   return (
-    <div className="app max-w-[599px]">
+    <div className="app">
       <Routes>
         <Route path="/" element={<Beranda />} />
         <Route path="/pencarian" element={<Pencarian />} />
@@ -35,9 +38,13 @@ function App() {
         <Route path="/checkout/:id" element={<CheckOut />} />
         <Route path="/product/:name" element={<Product />} />
         <Route path="/sukses" element={<Sukses />} />
+        <Route path="/toko" element={<PageProduk />} />
+        <Route path="/tokoSaya" element={<TokoSaya />} />
+        <Route path="/produkSaya" element={<ProdukSaya />} />
+        <Route path="/tambahProduk" element={<AddProductForm />} />
+        <Route path="/penghasilan" element={<Penghasilan />} />
       </Routes>
 
-      {/* Hanya render Navbar jika bukan halaman checkout */}
       {!hideNavbar && <Navbar />}
     </div>
   );

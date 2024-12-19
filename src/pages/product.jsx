@@ -4,6 +4,7 @@ import { useState } from "react";
 import BackToggle from "../utils/back";
 import ShareToggle from "../utils/share";
 import { Link } from "react-router-dom";
+import ProfilToko from "../components/profilToko";
 
 const Product = () => {
   const { productData, cart, setCart } = useCart();
@@ -125,7 +126,7 @@ const Product = () => {
           <h1 className="text-lg font-semibold">Ulasan</h1>
           <img className="w-24 h-full" src="../rating.png" alt="" />
         </div>
-        <TokoProduct />
+        <ProfilToko className={"text-[#3a6b30]"} />
         <button
           onClick={bargainToggle}
           className="bg-[#3a6b30] text-white p-4 mt-4 hover:bg-[#44b984] w-full rounded-xl"
@@ -145,7 +146,7 @@ const Bargain = ({ bargainToggle, product }) => {
   return (
     <div
       id="bargain"
-      className="w-full z-20 rounded-t-2xl fixed bottom-0 p-2 bg-white hidden transition duration-500 ease-in-out overflow-y-auto"
+      className="w-full z-20 rounded-t-2xl absolute bottom-0 p-2 bg-white hidden transition duration-500 ease-in-out overflow-y-auto"
     >
       <button onClick={bargainToggle} className="absolute top-4 right-4">
         <img className="w-6" src="../close.svg" alt="Close" />
@@ -180,33 +181,6 @@ const Bargain = ({ bargainToggle, product }) => {
         >
           Konfirmasi Penawaran
         </button>
-      </div>
-    </div>
-  );
-};
-
-const TokoProduct = () => {
-  return (
-    <div className="text-[#3a6b30] py-4 flex flex-row justify-between">
-      <div className="flex flex-row gap-4 items-center">
-        <div>
-          <img className=" w-16 rounded-full" src="../pp-tani.png" alt="" />
-        </div>
-        <div className="flex flex-col gap-1">
-          <h1 className="text-xl">PT Tani Raya</h1>
-          <p className="text-sm">Aktif 3 Menit Lalu</p>
-          <div className="flex flex-row text-xs gap-2">
-            <div className="flex flex-row">
-              <img className="w-4" src="../star.svg" alt="" />
-              <p>4.9/5.0 </p>
-            </div>
-            <p>100 RB Pengikut</p>
-          </div>
-        </div>
-      </div>
-      <div className="flex flex-col gap-2 text-center">
-        <Link className="border border-[#3a6b30] p-2 rounded-xl">Kunjungi</Link>
-        <Link className="border border-[#3a6b30] p-2 rounded-xl">Chat</Link>
       </div>
     </div>
   );

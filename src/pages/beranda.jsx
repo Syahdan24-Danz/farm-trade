@@ -2,10 +2,9 @@ import Search from "../components/beranda/search";
 import Carousel from "../components/beranda/carousel";
 import MenuKategori from "../components/beranda/menuKategori";
 import ProductList from "../components/beranda/cardProduct";
-
 const Beranda = () => {
   return (
-    <div className="p-4 text-black w-full max-w-[599px]">
+    <div className="p-4 text-black w-full">
       <div className="flex flex-col items-center gap-2 py-1 mb-2">
         <img className="w-8" src="yellow-carrot.png" alt="" />
         <div className="flex flex-row items-center gap-q">
@@ -18,6 +17,7 @@ const Beranda = () => {
       <MenuKategori />
       <ProductList />
       <MenuKategori title="Terlaris" />
+      <ProductList />
     </div>
   );
 };
